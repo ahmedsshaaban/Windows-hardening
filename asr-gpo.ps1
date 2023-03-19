@@ -62,7 +62,17 @@ $ASRRules = @{
     "92e97fa1-2edf-4476-bdd6-9dd0b4dddc7b" = "Block Win32 API calls from Office macros"
     "c1db55ab-c21a-4637-bb3f-a12568109d35" = "Use advanced protection against ransomware"
 }
-
+#Validate provided Rule GUIDS
+if ($AuditRules){
+ $validGUIDS=$ASRRules.Keys
+  foreach ($AR in $AuditRules)
+  {
+      if($AR -notin $validGUIDS){
+         Write-host -ForegroundColor Red "Invalid Rule GUID(s)"
+         exit
+      }
+  }
+}
 #list all ASR rules that are currently configured in the GPO and exit
 if ($list) {
     $configuredRules = @()
