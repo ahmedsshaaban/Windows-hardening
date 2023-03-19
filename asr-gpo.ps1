@@ -120,7 +120,7 @@ if ($list) {
 function createGPO ($GPOname) {
     #check if a GPO with the same name already exists
     if (Get-GPO -All | where { $_.DisplayName -eq "$GPOname" }) {
-        Write-Error "A GPO with the same name is already configured"
+        Write-Host -ForegroundColor Red "A GPO with the same name is already configured.use " -NoNewline; Write-Host -ForegroundColor White  "-ModifyExistentGPO" -NoNewline; Write-Host -ForegroundColor red " to modify an existent GPO"
         exit   
     }
     else {
